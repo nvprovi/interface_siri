@@ -1,0 +1,27 @@
+version: 0.2
+phases:
+ install:
+   commands:
+     - echo "install phase"
+     - apt-get update
+     - curl -s https://getcomposer.org/installer | php
+     - mv composer.phar /usr/local/bin/composer
+     - php --version
+
+ build:
+   commands:
+     - echo Installing composer deps
+     - composer clearcache     
+     - composer install     
+#     - php artisan event:cache
+#     - php artisan cache:clearphpunit
+#     - php artisan route:cache
+#     - php artisan config:cache
+ post_build:
+   commands:
+     - echo "postInstall phase"     
+artifacts:
+  type: zip
+  files:
+    - '**/*'
+  name: clyde-$(date +%Y-%m-%d)

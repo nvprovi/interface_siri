@@ -1,0 +1,16 @@
+#https://docs.aws.amazon.com/de_de/codepipeline/latest/userguide/tutorials-simple-codecommit.html
+#https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-lamp-amazon-linux-2.html
+#https://github.com/pietheinstrengholt/aws-codepipeline-laravel
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /var/www/html/
+hooks:
+  BeforeInstall:
+  AfterInstall:
+    - location: scripts/change_permissions.sh
+      timeout: 300
+      runas: root    
+  ApplicationStart:  
+  ApplicationStop:
